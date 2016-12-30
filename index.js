@@ -1,42 +1,20 @@
-var http = require('http');
-var net = require('net');
-var url = require('url');
+'use strict';
 
-function request(cReq, cRes) {
-    var u = url.parse(cReq.url);
+const http = require('http');
+const net = require('net');
 
-    var options = {
-        hostname : u.hostname, 
-        port     : u.port || 80,
-        path     : u.path,       
-        method     : cReq.method,
-        headers     : cReq.headers
-    };
-
-    var pReq = http.request(options, function(pRes) {
-        cRes.writeHead(pRes.statusCode, pRes.headers);
-        pRes.pipe(cRes);
-    }).on('error', function(e) {
-        cRes.end();
-    });
-
-    cReq.pipe(pReq);
+function request(cltReq, cltRes) {
+  let url = 'http://www.baidu.com/img/bd_logo1.png';
+  let pReq = http.request(url, function(res) {
+    cltRes.writeHead(res.statusCode, res.headers);
+    res.pipe(cltRes);
+  }).on('error', function(e) {
+    cltRes.end();
+  });
+  cltReq.pipe(pReq);
 }
 
-function connect(cReq, cSock) {
-    var u = url.parse('http://' + cReq.url);
-
-    var pSock = net.connect(u.port, u.hostname, function() {
-        cSock.write('HTTP/1.1 200 Connection Established\r\n\r\n');
-        pSock.pipe(cSock);
-    }).on('error', function(e) {
-        cSock.end();
-    });
-
-    cSock.pipe(pSock);
-}
 
 http.createServer()
-    .on('request', request)
-    .on('connect', connect)
-    .listen(8080);
+  .on('request', request)
+  .listen(8080, '0.0.0.0');
