@@ -4,7 +4,7 @@ const http = require('http');
 const net = require('net');
 
 function request(cltReq, cltRes) {
-  let url = 'http://www.baidu.com/img/bd_logo1.png';
+  let url = 'http://www.google.com/logos/doodles/2016/holidays-2016-day-3-southern-hemisphere-5185011929055232-hp2x.gif';
   let pReq = http.request(url, function(res) {
     cltRes.writeHead(res.statusCode, res.headers);
     res.pipe(cltRes);
