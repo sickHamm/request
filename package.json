@@ -3,9 +3,18 @@
   "version": "0.0.1",
   "description": "\"request more\"",
   "main": "index.js",
+  "engine": {
+    "node": "*",
+    "npm": "*"
+  },
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://bitbucket.org/yugu/request.git"
+  },
   "author": "yuguang",
-  "license": "GPLv3"
+  "license": "GPL-v3"
 }
